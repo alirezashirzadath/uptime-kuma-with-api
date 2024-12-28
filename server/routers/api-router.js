@@ -265,16 +265,19 @@ router.get(
 );
 
 router.post("/api/add-monitor", async (request, response) => {
+    let data = JSON.parse(request.body);
     allowAllOrigin(response);
     let monitor = R.dispense("monitor");
-    monitor.url = "https://google.com";
-    monitor.name = "Google";
+    let url = new URL(data.url);
+    monitor.url = url.origin;
+    monitor.name = url.host;
+    monitor.type = "http";
+    monitor.user_id = 1;
+    
     let id = await R.store(monitor);
     return response.json({
         success: "Ok",
         id,
-        user_id: 1,
-        type: "http",
     });
 });
 
