@@ -273,6 +273,8 @@ router.post("/api/add-monitor", async (request, response) => {
     return response.json({
         success: "Ok",
         id,
+        user_id: 1,
+        type: "http",
     });
 });
 
