@@ -269,9 +269,10 @@ router.post("/api/add-monitor", async (request, response) => {
     let monitor = R.dispense("monitor");
     monitor.url = "https://google.com";
     monitor.name = "Google";
-    await R.store(monitor);
+    let id = await R.store(monitor);
     return response.json({
         success: "Ok",
+        id,
     });
 });
 
